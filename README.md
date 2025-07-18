@@ -4,7 +4,14 @@
   Large Reasoning Models
 </h1>
 
+This repository is for our paper:
 
+> **[Efficient Reasoning Models: A Survey](https://arxiv.org/abs/2504.10903)** \
+> [Sicheng Feng](https://fscdc.github.io/)<sup>1,2</sup>, [Gongfan Fang](https://fangggf.github.io/)<sup>1</sup>, [Xinyin Ma](https://horseee.github.io/)<sup>1</sup>, [Xinchao Wang](https://sites.google.com/site/sitexinchaowang/)<sup>1,*</sup> \
+> <sup>1</sup>National University of Singapore, Singapore \
+> <sup>2</sup>Nankai University, Tianjin, China \
+> <sup>∗</sup>Corresponding author: xinchao@nus.edu.sg
+> 
 <p align="center"><img src="./figure/taxonomy.png" width="80%" height="80%"></p>
 
 # 📋 Overview 
