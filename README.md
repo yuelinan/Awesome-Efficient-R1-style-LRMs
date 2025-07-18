@@ -2,16 +2,17 @@
  <em>Don't Overthink It</em>: A Survey of Efficient R1-style 
 <br>
   Large Reasoning Models
+ <h3 align="center">
+   Linan Yue<sup>1,2</sup>, Yichao Du<sup>4</sup>, Yizhi Wang<sup>1,2</sup>, Weibo Gao<sup>3</sup>, Fangzhou Yao<sup>3</sup>,
+Li Wang<sup>4</sup>, Ziyu Xu<sup>1,2</sup>, Qi Liu<sup>3</sup>, Shimin Di<sup>1,2</sup>, Min-Ling Zhang<sup>1,2</sup><br>
+   <sup>1</sup>School of Computer Science and Engineering, Southeast University <br>
+ <sup>2</sup>Key Laboratory of Computer Network and Information Integration (Southeast University), Ministry of Education <br>
+ <sup>3</sup>University of Science and Technology of China & State Key Laboratory of Cognitive Intelligence <br>
+  <sup>4</sup>Alibaba Group <br>
+ </h3>
 </h1>
 
-This repository is for our paper:
 
-> **[Efficient Reasoning Models: A Survey](https://arxiv.org/abs/2504.10903)** \
-> [Sicheng Feng](https://fscdc.github.io/)<sup>1,2</sup>, [Gongfan Fang](https://fangggf.github.io/)<sup>1</sup>, [Xinyin Ma](https://horseee.github.io/)<sup>1</sup>, [Xinchao Wang](https://sites.google.com/site/sitexinchaowang/)<sup>1,*</sup> \
-> <sup>1</sup>National University of Singapore, Singapore \
-> <sup>2</sup>Nankai University, Tianjin, China \
-> <sup>∗</sup>Corresponding author: xinchao@nus.edu.sg
-> 
 <p align="center"><img src="./figure/taxonomy.png" width="80%" height="80%"></p>
 
 # 📋 Overview 
