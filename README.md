@@ -44,7 +44,7 @@ Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot
 - [Acknowledgements](#-Acknowledgements)
 ------
 
-# 📚 Selected Papers [/All Paper](./paper-list.md)
+# 📚 Selected Papers [/ All Paper](./paper-list.md)
 
 ## 🌟 Efficient Reasoning with Single Model
 Efficient reasoning with single model aims to achieve efficient reasoning by optimizing the reasoning process of a single model. This approach focuses on minimizing computational resources and reasoning time while maintaining reasoning accuracy, ensuring that the model can quickly and accurately generate answers. Specific methods include Early Exit, CoT Compression, Adaptive Reasoning , and Representation Engineering-based Efficient Reasoning.
