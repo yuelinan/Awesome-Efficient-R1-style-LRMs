@@ -20,7 +20,8 @@ Li Wang<sup>4</sup>, Ziyu Xu<sup>1,2</sup>, Qi Liu<sup>3</sup>, Shimin Di<sup>1,
 Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot due to their outstanding performance in handling complex tasks. Among them, DeepSeek R1 has garnered significant attention for its exceptional performance and open-source nature, driving advancements in the research of R1-style LRMs. Unlike traditional Large Language Models (LLMs), these models enhance logical deduction and decision-making capabilities during reasoning by incorporating mechanisms such as long chain-of-thought and self-reflection through reinforcement learning. However, with the widespread application of these models, the problem of "*overthinking*" has gradually emerged.  By  reviewing the current research advancements in the field of efficient reasoning methods systematically, we categorize existing works into two main directions based on the number of models involved in the reasoning process: (1) Efficient Reasoning with Single Model, which focuses on improving the reasoning efficiency of individual models; and (2) Efficient Reasoning with Model Collaboration, which explores optimizing reasoning paths through collaboration among multiple models.
 
 <p align="center"><img src="./figure/taxonomy2.png" width="80%" height="80%"></p>
-> 🙋 If you find any mistakes or have suggestions, feel free to open a pull request or contact us at lnyue@seu.edu.cn.
+>🙋 If you find any mistakes or have suggestions, feel free to open a pull request or contact us at lnyue@seu.edu.cn.
+
 
 ------
 
