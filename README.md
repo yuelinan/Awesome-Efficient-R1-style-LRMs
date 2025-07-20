@@ -192,7 +192,8 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 
 | English Note | Chinese Note |
 | ------------ | ------------ |
-|              |              |
+|   Similar to the previous two papers, both focus on suppressing the generation of related keywords.
+           | 与上两篇论文类似，均为抑制相关关键词的生成。             |
 </details>  
 
 #### 
