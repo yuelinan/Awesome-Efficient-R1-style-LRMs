@@ -215,6 +215,10 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
     [Paper]
 </a></summary>
 
+<summary> Think How to Think: Mitigating Overthinking with Autonomous Difficulty Cognition in Large Reasoning Models<a href="https://arxiv.org/pdf/2507.02663" target="_blank">
+    [Paper]
+</a></summary>
+
 
 
 ### Adaptive Reasoning
