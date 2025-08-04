@@ -1307,7 +1307,6 @@ Efficient reasoning with model collaboration aims to enhance reasoning efficienc
 
 
 
-# 🔍 Citation 
 
 
 # 🧩 Acknowledgements
