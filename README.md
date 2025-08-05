@@ -1,16 +1,29 @@
-<h1 align="center">
- <em>Don't Overthink It</em>: A Survey of Efficient R1-style 
-<br>
-  Large Reasoning Models
- <h4 align="center">
-   Linan Yue<sup>1,2</sup>, Yichao Du<sup>4</sup>, Yizhi Wang<sup>1,2</sup>, Weibo Gao<sup>3</sup>, Fangzhou Yao<sup>3</sup>,
+
+<div align="center">
+  <h1><em>Don't Overthink It</em>: A Survey of Efficient R1-style <br>
+  Large Reasoning Models</h1>
+</div>
+
+<div align="center">
+<a href='https://arxiv.org/abs/2508.02120'><img src='https://img.shields.io/badge/Arxiv-2508.02120-b31b1b.svg?logo=arXiv'></a>
+
+Linan Yue<sup>1,2</sup>, Yichao Du<sup>4</sup>, Yizhi Wang<sup>1,2</sup>, Weibo Gao<sup>3</sup>, Fangzhou Yao<sup>3</sup>,
 Li Wang<sup>4</sup>, Ye Liu<sup>3</sup>, Ziyu Xu<sup>1,2</sup>, Qi Liu<sup>3</sup>, Shimin Di<sup>1,2</sup>, Min-Ling Zhang<sup>1,2</sup><br>
-   <sup>1</sup>School of Computer Science and Engineering, Southeast University <br>
+</div>
+
+<div align="center">
+<sup>1</sup>School of Computer Science and Engineering, Southeast University <br>
  <sup>2</sup>Key Laboratory of Computer Network and Information Integration (Southeast University), Ministry of Education <br>
  <sup>3</sup>University of Science and Technology of China & State Key Laboratory of Cognitive Intelligence <br>
   <sup>4</sup>Alibaba Group <br>
- </h4>
-</h1>
+</div>
+
+
+
+
+---
+
+
 
 
 <p align="center"><img src="./figure/taxonomy.png" width="80%" height="80%"></p>
