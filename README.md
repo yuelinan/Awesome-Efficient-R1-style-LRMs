@@ -1318,6 +1318,17 @@ Efficient reasoning with model collaboration aims to enhance reasoning efficienc
 | This paper proposes a Speculative Chain-of-Thought (SCoT) framework based on collaboration between large and small models. The method employs a lightweight draft model to generate preliminary reasoning chains, which are then selected and corrected by the target model, effectively improving reasoning efficiency and speed. | 本文提出了一种基于大模型与小模型协同的Speculative Chain-of-Thought（SCoT）框架。该方法通过轻量级草稿模型进行思维链草拟，并利用目标模型对草稿进行选择和纠错，有效提升了推理效率与速度。 |
 </details>
 
+# 🔍 Citation
+
+```bibtex
+@article{yue2025don,
+  title={Don't Overthink It: A Survey of Efficient R1-style Large Reasoning Models},
+  author={Yue, Linan and Du, Yichao and Wang, Yizhi and Gao, Weibo and Yao, Fangzhou and Wang, Li and Liu, Ye and Xu, Ziyu and Liu, Qi and Di, Shimin and others},
+  journal={arXiv preprint arXiv:2508.02120},
+  year={2025}
+}
+```
+
 
 
 
