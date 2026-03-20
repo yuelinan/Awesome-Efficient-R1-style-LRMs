@@ -44,8 +44,7 @@ Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot
     - [Adaptive Reasoning](#Adaptive-Reasoning)
     - [Representation Engineering based Efficient Reasoning](#Representation-Engineering-based-Efficient-Reasoning)
   - [Efficient Reasoning with Model Collaboration](#-Efficient-Reasoning-with-Model-Collaboration)
-    - [Long–Short Model Collaboration](#Long–Short-Model-Collaboration)
-    - [LLM Routing](#LLM-Routing)
+    - [Long–Short Model Collaboration Reasoning](#Long–Short-Model-Collaboration-Reasoning)
     - [Model Consolidation](#Model-Consolidation)
     - [Speculative Decoding](#Speculative-Decoding)
 - [Citation](#-Citation)
@@ -924,7 +923,7 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 ## 🌟 Efficient Reasoning with Model Collaboration
 Efficient reasoning with model collaboration aims to enhance reasoning efficiency and accuracy in LLMs by enabling cooperation between multiple LLMs, each leveraging distinct reasoning strengths. Unlike single model efficient reasoning method, collaborative frameworks strategically combine long-chain reasoning models (long CoT) that excel at handling complex tasks and short-chain reasoning models (short CoT) that are lightweight and efficient for general tasks. This synergy allows for more fine-grained and cost-effective control of the reasoning process. Specific methods include Long–Short Model Collaboration, LLM Routing, Model Consolidation, and Speculative Decoding.
 
-### Long–Short Model Collaboration
+### Long–Short Model Collaboration Reasoning
 
 <details>
 <summary> SplitReason: Learning To Offload Reasoning<a href="https://arxiv.org/pdf/2504.16379" target="_blank">
@@ -1062,90 +1061,6 @@ Efficient reasoning with model collaboration aims to enhance reasoning efficienc
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Unlike other approaches that rely on reinforcement learning for adaptive reasoning, **ThinkSwitcher** introduces a lightweight reasoning mode switcher that dynamically selects between short- and long-chain reasoning paths based on input complexity, without requiring additional training of the reasoning model itself. The switcher takes the representation vector of the input question and predicts the expected performance of both reasoning modes. During training, ThinkSwitcher adopts a multi-sampling evaluation strategy by generating multiple responses for each mode and constructs a continuous supervision signal based on empirical success rates, thereby avoiding instability caused by binary classification labels. At inference time, the model selects the optimal reasoning path according to the switcher's prediction, effectively balancing performance and efficiency. | 不同于其他方法采用强化学习实现自适应学习，**ThinkSwitcher** 通过构建轻量级的模式切换器，在无需额外训练推理模型的基础上，实现了基于输入复杂度的推理模式动态选择。该切换器以问题的表示向量为输入，预测短链与长链思维路径的推理表现。训练阶段，ThinkSwitcher 采用多次采样评估策略，为每个推理模式生成多个响应，并基于经验通过率构建连续型监督信号，从而避免了二分类标签带来的不稳定性。在推理阶段，模型依据切换器的判断选择最优推理路径，从而实现性能与效率的有效协同。 |
 </details> 
-
-### LLM Routing
-
-<details>
-<summary>Self-Route: Automatic Mode Switching via Capability Estimation for Efficient Reasoning <a href="https://arxiv.org/pdf/2505.20664" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper first constructs a dataset annotated with whether reasoning is required based on question difficulty, and uses it to train a reasoning mode router. During routing, a lightweight pre-reasoning stage is introduced to extract **capability-aware embeddings** from the model's hidden layers, which are used to assess the model's ability to solve the current problem in real time. If the assessment indicates that the problem is complex, the reasoning mode is triggered to generate a detailed reasoning chain; otherwise, a general mode is adopted to directly produce the answer, thereby avoiding excessive reasoning for simple questions. | 本文首先基于问题难度构建了一个标注是否需要推理的数据集，并据此训练推理模式路由器。在进行路由时，引入轻量级的预推理阶段，从模型的隐藏层中提取能力感知嵌入（Capability-aware Embeddings），用于实时评估模型解决当前问题的能力。若评估结果表明问题较为复杂，则触发推理模式以生成详细的推理链；若问题较为简单，则直接采用通用模式生成答案，从而避免对简单问题的过度推理。 |
-</details>
-
-#### 
-
-<details>
-<summary>Route-and-Reason: Scaling Large Language Model Reasoning with Reinforced Model Router <a href="https://arxiv.org/pdf/2506.05901" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **R2-Reasoner**, a general framework for multi-model collaborative reasoning based on reinforcement learning. The framework consists of a task decomposer and a subtask allocator: the former breaks down complex tasks into a sequence of well-structured and logically ordered subtasks, while the latter assigns each subtask to the most suitable model within a heterogeneous model pool based on difficulty. During training, both modules are first supervised-finetuned using a constructed dataset, followed by staged reinforcement learning that alternately optimizes their parameters, enabling efficient and adaptive reasoning routing. | 本文提出 **R2-Reasoner**，一种通过强化学习实现多模型协同推理的通用框架。该方法由任务分解器和子任务分配器组成：前者将复杂任务拆解为结构清晰、逻辑有序的子任务序列，后者则根据子任务难度，将其分配给异构模型池中最合适的模型。训练阶段先利用构造的数据集对两个模块进行监督微调，随后通过分阶段的强化学习轮流优化两模块参数，实现高效、自适应的推理路由。 |
-</details>
-
-#### 
-
-<details>
-<summary> TagRouter: Learning Route to LLMs through Tags for Open-Domain Text Generation Tasks<a href="https://www.arxiv.org/abs/2506.12473" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **TagRouter**, a training-free model routing method for open-domain text generation tasks. It enables collaborative reasoning and cost control across multiple large language models by introducing **self-aware tags**. The TagRouter framework consists of three modules: the **TagGenerator**, which produces semantically relevant tags for the input query; the **TagScorer**, which builds a mapping between tags and candidate model performance based on existing data; and the **TagDecider**, which selects and routes models automatically based on predefined optimization strategies, enabling efficient and parameter-free reasoning. | 该论文提出 **TagRouter**，一种面向开域文本生成任务的**训练无关模型路由方法**，旨在通过引入**自感知标签**实现多大语言模型之间的协同推理与成本控制。TAGROUTER 框架由三个模块组成：**Tag Generator** 用于为输入查询生成语义相关的标签，**TagScorer** 基于已有数据建立标签与候选模型性能之间的映射关系，**TagDecider** 则根据设定的优化策略实现自动化、无需调参的模型选择与路由，实现高效推理。 |
-</details>
-
-#### 
-
-<details>
-<summary> Long or short CoT? Investigating Instance-level Switch of Large Reasoning Models<a href="https://arxiv.org/pdf/2506.04182" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **SwitchCoT** proposes a dynamic instance-based strategy for switching between long-chain and short-chain reasoning. A lightweight policy selector chooses the most appropriate reasoning approach based on input features and computational budget, while prompt engineering controls the language model's generation process. This achieves a balance between efficiency and accuracy without modifying the model parameters. | SwitchCoT 提出了一种基于实例动态切换长短链式推理策略，通过轻量级的策略选择器根据输入特征与计算预算选择最合适的推理方式，并结合提示工程控制语言模型生成过程，在不修改模型参数的前提下实现高效与准确性的平衡。 |
-</details>
-
-#### 
-
-<details>
-<summary>Router-R1: Teaching LLMs Multi-Round Routing and Aggregation via Reinforcement Learning <a href="https://arxiv.org/pdf/2506.09033" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **Router-R1** models the routing process as a sequential decision-making task, where the router itself is a reasoning-capable language model. It dynamically alternates between “thinking” and “invoking” actions to enable adaptive collaboration among multiple models during task execution. A regularized reward function—comprising format consistency, task accuracy, and computational cost—guides the model to balance performance and efficiency. | Router-R1 是通过将路由过程建模为序贯决策任务，并将路由器本身设计为具备推理能力的语言模型，实现“思考”与“调用”操作的动态交替，从而在任务执行中自适应地协同多个模型。其通过由格式、结果与成本构成的规则化奖励函数，引导模型在性能与开销之间取得平衡。 |
-</details>
-
-#### 
-
-<details>
-<summary>R2R: Efficiently Navigating Divergent Reasoning Paths with Small-Large Model Token Routing <a href="https://arxiv.org/pdf/2505.21600" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **Roads to Rome (R2R)**, a token-level routing approach that enables efficient and high-quality reasoning with small language models (SLMs) by invoking large language models (LLMs) only for key tokens that may lead to reasoning divergence. By combining automatic annotation with a lightweight router, R2R significantly improves inference efficiency while maintaining the accuracy of the reasoning process. | 这篇论文提出了一种名为“Roads to Rome (R2R)”的逐词路由方法，首先通过小模型进行推理，仅对推理中会导致路径分歧的关键词调用大型语言模型（LLM）。该方法通过自动标注和轻量路由器，显著提升了模型推理效率，同时保持了推理结果的准确性。 |
-</details>
 
 ### Model Consolidation
 
