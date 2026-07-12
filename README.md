@@ -30,7 +30,7 @@ Li Wang<sup>4</sup>, Ye Liu<sup>3</sup>, Ziyu Xu<sup>1,2</sup>, Qi Liu<sup>3</su
 Recently, Large Reasoning Models (LRMs) have become a research hotspot due to their outstanding performance in handling complex tasks. Among them, DeepSeek-R1 has garnered significant attention for its exceptional performance and open-source nature, driving rapid advancements in R1-style LRMs. However, with the widespread application of these  R1-style LRMs, the problem of overthinking has gradually emerged, where excessively long and redundant reasoning chains are generated, leading to reduced inference efficiency and sometimes degraded answer accuracy. To address this, various efficient reasoning methods for R1-style LRMs aim to shorten reasoning paths without compromising performance. In this survey, we systematically review these methods from a reasoning-control perspective, categorizing them by the main object being controlled: internal representations, reasoning traces, reasoning length, and reasoning systems.
 
 
-<p align="center"><img src="./figure/taxonomy3.png" width="80%" height="80%"></p>
+<p align="center"><img src="./figure/taxonomy4.png" width="80%" height="80%"></p>
 
 
 ------
