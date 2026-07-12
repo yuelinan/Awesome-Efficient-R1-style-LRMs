@@ -1,8 +1,5 @@
 # 📚 All Papers 
 
-## 🌟 Efficient Reasoning with Single Model
-
-Efficient reasoning with single model aims to achieve efficient reasoning by optimizing the reasoning process of a single model. This approach focuses on minimizing computational resources and reasoning time while maintaining reasoning accuracy, ensuring that the model can quickly and accurately generate answers. Specific methods include Early Exit, CoT Compression, Adaptive Reasoning , and Representation Engineering-based Efficient Reasoning.
 
 ### Early Exit
 
@@ -467,9 +464,6 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 </a></summary>
 
 
-## 🌟 Efficient Reasoning with Model Collaboration
-
-Efficient reasoning with model collaboration aims to enhance reasoning efficiency and accuracy in LLMs by enabling cooperation between multiple LLMs, each leveraging distinct reasoning strengths. Unlike single model efficient reasoning method, collaborative frameworks strategically combine long-chain reasoning models (long CoT) that excel at handling complex tasks and short-chain reasoning models (short CoT) that are lightweight and efficient for general tasks. This synergy allows for more fine-grained and cost-effective control of the reasoning process. Specific methods include Long–Short Model Collaboration, LLM Routing, Model Consolidation, and Speculative Decoding.
 
 
 ### Long–Short Model Collaboration
