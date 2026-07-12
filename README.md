@@ -27,7 +27,7 @@ Li Wang<sup>4</sup>, Ye Liu<sup>3</sup>, Ziyu Xu<sup>1,2</sup>, Qi Liu<sup>3</su
 
 # 📋 Overview 
 
-Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot due to their outstanding performance in handling complex tasks. Among them, DeepSeek R1 has garnered significant attention for its exceptional performance and open-source nature, driving advancements in the research of R1-style LRMs. Unlike traditional Large Language Models (LLMs), these models enhance logical deduction and decision-making capabilities during reasoning by incorporating mechanisms such as long chain-of-thought and self-reflection through reinforcement learning. However, with the widespread application of these models, the problem of "*overthinking*" has gradually emerged.  By  reviewing the current research advancements in the field of efficient reasoning methods systematically, we categorize existing works into two main directions based on the number of models involved in the reasoning process: (1) Efficient Reasoning with Single Model, which focuses on improving the reasoning efficiency of individual models; and (2) Efficient Reasoning with Model Collaboration, which explores optimizing reasoning paths through collaboration among multiple models.
+Recently, Large Reasoning Models (LRMs) have become a research hotspot due to their outstanding performance in handling complex tasks. Among them, DeepSeek-R1 has garnered significant attention for its exceptional performance and open-source nature, driving rapid advancements in R1-style LRMs. However, with the widespread application of these  R1-style LRMs, the problem of overthinking has gradually emerged, where excessively long and redundant reasoning chains are generated, leading to reduced inference efficiency and sometimes degraded answer accuracy. To address this, various efficient reasoning methods for R1-style LRMs aim to shorten reasoning paths without compromising performance. In this survey, we systematically review these methods from a reasoning-control perspective, categorizing them by the main object being controlled: internal representations, reasoning traces, reasoning length, and reasoning systems.
 
 
 <p align="center"><img src="./figure/taxonomy3.png" width="80%" height="80%"></p>
@@ -38,15 +38,15 @@ Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot
 # 📑 Table of Contents 
 
 - [Selected Papers](#-Selected-Papers)
-  - [Efficient Reasoning with Single Model](#-Efficient-Reasoning-with-Single-Model)
-    - [Early Exit](#Early-Exit)
+  - [Efficient Reasoning by Controlling Internal Representations](#-Efficient-Reasoning-by-Controlling-Internal-Representations)
+  - [Efficient Reasoning by Controlling Reasoning Traces](#-Efficient-Reasoning-by-Controlling-Reasoning-Traces)
     - [CoT Compression](#CoT-Compression)
+  - [Efficient Reasoning by Controlling Reasoning Length](#-Efficient-Reasoning-by-Controlling-Reasoning-Length)
+    - [Early Exit](#Early-Exit)
     - [Adaptive Reasoning](#Adaptive-Reasoning)
-    - [Representation Engineering based Efficient Reasoning](#Representation-Engineering-based-Efficient-Reasoning)
-  - [Efficient Reasoning with Model Collaboration](#-Efficient-Reasoning-with-Model-Collaboration)
+  - [Efficient Reasoning by Controlling Reasoning System](#-Efficient-Reasoning-by-Controlling-Reasoning-System)
     - [Long–Short Model Collaboration Reasoning](#Long–Short-Model-Collaboration-Reasoning)
     - [Model Consolidation](#Model-Consolidation)
-    - [Speculative Decoding](#Speculative-Decoding)
 - [Citation](#-Citation)
 - [Acknowledgements](#-Acknowledgements)
 ------
@@ -54,37 +54,11 @@ Recently, Large Reasoning Models (LRMs) have gradually become a research hotspot
 # 📚 Selected Papers [[All Paper]](./paper-list.md)
 >🙋 Each selected paper includes both an English Note and a Chinese Note, providing a brief summary of the work. If you notice any mistakes, have suggestions, or would like to add a paper, feel free to open a pull request or contact us at lnyue@seu.edu.cn.
 
-## 🌟 Efficient Reasoning with Single Model
-Efficient reasoning with single model aims to achieve efficient reasoning by optimizing the reasoning process of a single model. This approach focuses on minimizing computational resources and reasoning time while maintaining reasoning accuracy, ensuring that the model can quickly and accurately generate answers. Specific methods include Early Exit, CoT Compression, Adaptive Reasoning , and Representation Engineering-based Efficient Reasoning.
-
-### Early Exit
-
-<details>
-  <summary> To Think or Not to Think: Exploring the Unthinking Vulnerability in Large Reasoning Models <a href="https://arxiv.org/pdf/2502.12202" target="_blank">
-    [Paper]
-</a></summary>
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| The authors propose the **Monitoring of Thought (MoT)** framework, which dynamically evaluates the necessity of deep reasoning both before and during the inference process of a large reasoning model. Once it determines that the current input or reasoning is sufficient, MoT immediately terminates the reasoning process, thereby avoiding redundant computation and improving efficiency. | 作者提出了思维监控框架（Monitoring of Thought, MoT），该框架在推理大模型接收输入前及推理过程中动态评估是否需要进行深度思考。一旦判断当前输入或推理已足够，MoT即刻终止推理过程，避免冗余计算，提高效率。 |
-</details>                                                                                                             
+## 🌟 Efficient Reasoning by Controlling Internal Representations
 
 
 <details>
-<summary> Dynamic Early Exit in Reasoning Models <a href="https://arxiv.org/pdf/2504.15895" target="_blank">
-    [Paper]
-</a></summary>
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **DEER**, a **training-free dynamic early-exit reasoning** method. DEER first detects pivotal keywords (e.g., *“wait”*) in long chain-of-thought (CoT) sequences and replaces them with guiding tokens such as *“final answer”* to prompt the model to generate a **tentative answer** based on the current reasoning context. The **confidence** of the tentative answer is then evaluated: if sufficiently high, the answer is returned directly; otherwise, the model rolls back to the turning point and continues reasoning. To further improve efficiency, DEER introduces a **branch-parallel acceleration strategy** that executes tentative answer evaluation and continued reasoning in parallel, significantly improving inference speed and resource utilization. | 该论文提出一种**无需训练的动态推理提前退出方法 DEER**。该方法首先在长 CoT 中检测具有转折意义的关键词（如 “wait”），并将其替换为“final answer”等引导词，提示模型基于当前推理内容生成**试探性答案**。随后，评估该答案的**置信度**：若置信度足够高则直接输出，反之则回退至转折点继续推理。为提升推理效率，DEER进一步设计了**分支并行加速策略**，将试探性答案评估与后续推理并行执行，有效提升整体推理速度与资源利用率。 |
- </details>                                                  
-
-
-
-
-<details>
-<summary>ConCISE: Confidence-guided Compression in Step-by-step Efficient Reasoning <a href="https://arxiv.org/pdf/2505.04881" target="_blank">
+<summary>Steerable Reasoning Calibration of Large Language Models for Free <a href="https://arxiv.org/pdf/2504.07986" target="_blank">
     [Paper]
 </a></summary>
 
@@ -92,66 +66,13 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 
 | English Note                                                 | Chinese Note                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes the **CONCISE** framework. The authors identify two typical redundancy patterns in reasoning: (1) **Confidence Deficit**, where the model underestimates its correct intermediate reasoning steps, triggering unnecessary self-reflection; and (2) **Termination Delay**, where the model continues reflecting even after generating the correct answer. To address these issues, CONCISE introduces two techniques: **Confidence Injection**, which inserts high-confidence phrases to boost the model's trust in its intermediate reasoning; and **Early Stopping**, which employs a confidence detector to monitor model certainty and halts generation once a predefined threshold is exceeded. | 这篇论文提出 CONCISE 框架。作者首先归纳了推理中存在两种典型冗余模式：一是置信度不足（Confidence Deficit），即模型低估自身正确推理步骤，从而触发不必要的反思；二是终止延迟（Termination Delay），即生成正确答案后仍持续反思，造成冗余。为此，CONCISE框架**置信度注入（Confidence Injection）方法，通过插入高置信度短语提升模型对中间推理的信任度。提前终止（Early Stopping）方法通过置信度探测器监控模型置信度，在超过设定阈值时终止生成。 |
-</details>                                                   
-
-
-
-<details>
-<summary> Think or Not? Exploring Thinking Efficiency in Large Reasoning Models via an Information-Theoretic Lens<a href="https://arxiv.org/pdf/2505.18237" target="_blank">
-    [Paper]
-</a></summary>
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper revisits the efficiency of reasoning paths in large language models from an information-theoretic perspective, revealing a fundamental trade-off between *reasoning length* and *semantic efficiency*. The authors introduce two novel metrics: **InfoBias**, which measures the deviation of a model’s reasoning path from the ideal path, and **InfoGain**, which quantifies the information increment brought by each reasoning step. Empirical studies show that longer reasoning paths exhibit higher InfoBias and diminishing InfoGain, especially when generating incorrect answers. To address this, the paper proposes an **information entropy–based adaptive reasoning mechanism**, which includes a dynamic stopping strategy (terminating reasoning early when InfoGain remains below a threshold for *k* consecutive steps) and entropy-regularized training (introducing an entropy loss during fine-tuning to encourage the model to terminate early under low-entropy conditions). | 本文从信息论视角重新审视了大型语言模型推理路径的效率问题，揭示了“推理长度”与“语义效率”之间存在基本权衡关系。作者引入了两个新指标：**InfoBias**（衡量模型推理路径偏离理想路径的程度）和 **InfoGain**（衡量每步推理所带来的信息增量），并通过实证研究发现：推理路径越长，信息偏差越高、信息增益越递减，特别是在生成错误答案时更为显著。为此，提出了一种**基于信息熵的自适应推理机制**，包括动态终止机制（当连续k步的InfoGain低于阈值时，提前终止推理）和熵正则化训练（在微调阶段引入熵损失函数，鼓励模型在低熵状态下提前终止）。 |
-</details>                                               
-
-
-<details>
-<summary> Scalable Chain of Thoughts via Elastic Reasoning<a href="https://arxiv.org/pdf/2505.05315" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes the **Elastic Reasoning** method, which divides the token budget of the reasoning process into two parts: the thinking phase and the answering phase, enabling controllable and adaptive management of reasoning length. The method enforces early termination of the reasoning once the token budget for the thinking phase is reached, ensuring the completeness of the answering phase. | 这篇论文提出了弹性推理（Elastic Reasoning）方法，通过将推理过程的token预算分为思考阶段和解答阶段两部分，实现对推理长度的可控和自适应管理。该方法通过在思考阶段达到预算上限时强制结束推理，保证了解答部分的完整性。 |
- </details>                                                
-
-
-<details>
-<summary> Answer Convergence as a Signal for Early Stopping in Reasoning<a href="https://arxiv.org/pdf/2506.02536" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper addresses the issues of verbosity and redundancy in chain-of-thought reasoning of large language models (LLMs) and proposes three early stopping strategies to improve inference efficiency: (1) an unsupervised stopping mechanism based on answer consistency, which detects convergence by monitoring the consistency of consecutive output answers; (2) a decoding strategy that adjusts the probability of generating an “end-of-reasoning” token to encourage early termination; and (3) a supervised learning method leveraging internal model activation sequences, where an LSTM models reasoning progress to dynamically predict the optimal stopping point. | 这篇论文针对大型语言模型（LLMs）链式思维推理中存在的冗长和冗余问题，提出了三种推理过程中的提前终止策略以提升推理效率：基于答案一致性的无监督停止机制，通过监测连续输出答案的一致性判断推理是否收敛；基于结束标记概率调整的解码策略，提升模型生成“推理结束”标记的概率以促使提前停止；以及基于模型内部激活序列的监督学习方法，利用LSTM对推理进度进行建模，动态预测最佳停止点。 |
-</details>                                                
-
-
-
-<details>
-<summary> Reasoning Models Know When They’re Right: Probing Hidden States for Self-Verification<a href="https://arxiv.org/pdf/2504.05419" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper segments the full reasoning process into several chunks, with the model generating an intermediate answer at the end of each chunk. Each intermediate answer is labeled with a binary supervision signal (*y* ∈ {0, 1}) indicating whether it corresponds to the final correct answer. The final hidden state of each chunk is extracted as the input feature *x*, forming a training dataset of (*x*, *y*) pairs. A multi-layer perceptron (MLP) probe is then trained to predict the probability that a given intermediate answer is correct. During inference, if the predicted probability of an intermediate answer being correct exceeds a certain threshold, reasoning is terminated early and the answer is output, thereby reducing unnecessary computational overhead. | 本文将完整的推理过程划分为若干个 chunk，并在每个 chunk 末尾由模型生成一个中间答案，标注其是否为最终正确答案（以 0/1 作为监督信号 y）。同时，提取每个 chunk 对应的最后一个 hidden state 作为输入特征 x，构建训练数据集 (x, y)。在此基础上训练一个 MLP 探针，用于预测当前答案为正确答案的概率。在推理阶段，当模型生成的某一中间答案被判定为正确概率较高时，即可提前终止推理并输出该答案，从而有效减少不必要的计算开销。 |
- </details>                                                 
+| **SEAL (Steerable rEAsoning caLibration)** is a training-free method for improving reasoning efficiency. It classifies reasoning units in the large language model's reasoning process into execution, reflection, and transition types, and constructs a **reasoning guidance vector** to represent the direction of efficient reasoning. During decoding, SEAL refines the hidden space representations in real time to dynamically suppress redundant reflections and abrupt transitions, while preserving essential execution logic. | SEAL（Steerable rEAsoning caLibration）是一种无需额外训练的推理效率提升方法，通过对大语言模型推理过程中的思维单元进行分类（执行、反思、过渡），构造“推理引导向量”以表示高效推理方向，并在推理解码时对隐空间表示进行微调，从而动态抑制冗余的反思与跳跃性推理，保留关键执行逻辑。 |
+</details>                                       
 
 #### 
 
 <details>
-<summary>FlashThink: An Early Exit Method For Efficient Reasoning <a href="https://arxiv.org/pdf/2505.13949" target="_blank">
+<summary> On Reasoning Strength Planning in Large Reasoning Models<a href="https://arxiv.org/pdf/2506.08390" target="_blank">
     [Paper]
 </a></summary>
 
@@ -159,27 +80,13 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 
 | English Note                                                 | Chinese Note                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| FlashThink designs an early stopping mechanism based on a verification model. This method divides the reasoning content into multiple segments and uses a trained verification model to determine whether the current segment is sufficient to produce the correct answer, thereby deciding whether to terminate reasoning early. | FlashThink 设计了一种基于验证模型的早停机制。该方法将推理内容划分为多个片段，利用训练好的验证模型判断当前推理片段是否已足够得到正确答案，从而决定是否提前终止推理。 |
-</details>                                             
-
-
-
-<details>
-<summary> Wait, We Don’t Need to “Wait” ! Removing Thinking Tokens Improves Reasoning Efficiency<a href="https://arxiv.org/pdf/2506.08343" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes the **NOWAIT** method, which employs a logit processor during inference to **effectively prohibit the generation of specific key tokens**. For any designated key tokens, its corresponding logit value is set to a large negative number during generation, making tokens related to self-reflection nearly impossible to be sampled by the model, thereby enabling more efficient reasoning. The suppressed key tokens include:<br/> “wait,” “alternatively,” “hmm,” “but,” “however,” “alternative,” “another,” “check,” “double-check,” “oh,” “maybe,” “verify,” “other,” “again,” “now,” “ah,” and “any.” | 本文提出NOWAIT方法 ,在推理过程中采用 logit 处理器，**有效禁止模型生成特定关键词**。对于任意指定关键词，生成时直接将其对应的 logit 值设置为极大负数，从而使与反思相关的 token 几乎不可能被模型采样，进而实现高效推理。关键词包括：<br/> “wait”, “alternatively”, “hmm”, “but”, “however”, “alternative”, “another”, “check”, “double-check”, “oh”, “maybe”, “verify”, “other”, “again”, “now”, “ah”, “any” |
+| We investigate this phenomenon from the perspective of model activations. Our analysis reveals that LRMs pre-plan the *reasoning intensity* in their activations before generating any reasoning content, and this intensity is causally governed by the magnitude of a pre-allocated *directional vector*. Specifically, using linear probes, we show that the number of reasoning tokens can be predicted solely from the activation patterns of the input question, suggesting that the model is capable of estimating the required reasoning effort in advance. Further analysis indicates that LRMs encode this reasoning intensity via a directional vector embedded in the activation space, where the vector’s magnitude modulates the intensity. Subtracting this vector reduces both the number of reasoning tokens and final performance, while adding it leads to longer reasoning traces and improved accuracy. Moreover, this directional vector consistently predicts the reasoning length and influences the duration of the reasoning phase by modifying the logits of the termination token (</think>). | 本文从模型激活的视角对此现象进行了探讨。我们发现，LRMs在生成推理内容之前，已在激活中预先规划了推理强度，而该推理强度由一个预先分配的方向向量的大小因果控制。具体而言，我们利用线性探针表明，仅凭问题的激活信息即可预测推理token的数量，表明模型能够提前估计所需的推理强度。进一步分析发现，LRMs通过嵌入在激活中的预分配方向向量编码这一推理强度，该向量的大小调节推理强度。对该向量的减法操作会导致推理token数和性能下降，而加法操作则会增加推理token数并提升性能。此外，该方向向量持续对推理长度产生正向预测效果，并通过修改终止推理token（</think>）的logits来影响推理过程的长度。 |
  </details>                                             
 
 #### 
 
 <details>
-<summary> Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs<a href="https://arxiv.org/pdf/2501.18585" target="_blank">
+<summary> CoT-Valve: Length-Compressible Chain-of-Thought Tuning<a href="https://arxiv.org/pdf/2502.09601" target="_blank">
     [Paper]
 </a></summary>
 
@@ -187,28 +94,13 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 
 | English Note                                                 | Chinese Note                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Wang et al. propose the **Thought Switching Penalty (TIP)**, which adjusts the logits of **tokens associated with thought transitions**. | Wang等人提出思路切换惩罚方法（TIP, Thought Switching Penalty），对**与思路切换相关的 token**的 logits进行调整。 |
- </details>                                               
+| This paper proposes **Length-Compressible Chain-of-Thought (CoT) Tuning**, a fine-tuning strategy that learns a directional vector in parameter space to effectively control the length of reasoning chains. | 本文提出一种**长度可压缩的Chain-of-Thought微调策略**（Length-Compressible CoT Tuning），通过在参数空间中学习一条方向向量，实现对推理链长度的有效控制。 |
+ </details>                                                 
 
 #### 
 
 <details>
-<summary> Efficient Reasoning Through Suppression of Self-Affirmation Reflections in Large Reasoning Models <a href="https://www.arxiv.org/pdf/2506.12353" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note | Chinese Note |
-| ------------ | ------------ |
-|   Similar to the previous two papers, both focus on suppressing the generation of related keywords.
-           | 与上两篇论文类似，均为抑制相关关键词的生成。             |
-</details>  
-
-#### 
-
-<details>
-<summary>S-GRPO: Early Exit via Reinforcement Learning in Reasoning Models <a href="https://arxiv.org/pdf/2505.07686" target="_blank">
+<summary>Overclocking LLM Reasoning: Monitoring and Controlling Thinking Path Lengths in LLMs <a href="https://arxiv.org/pdf/2506.07240" target="_blank">
     [Paper]
 </a></summary>
 
@@ -216,8 +108,39 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 
 | English Note                                                 | Chinese Note                                                 |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This method inserts  *early exit* instructions at different positions within a single reasoning chain to construct multiple serial reasoning path groups. It then applies a decaying reward strategy based on the exit position: the earlier the model terminates reasoning while still producing a correct answer, the higher the reward it receives. This guides the model to stop reasoning as early as possible without sacrificing accuracy. | S-GRPO（Serial-Group Decaying-Reward Policy Optimization）方法通过在单条思维链不同位置插入“提前退出”指令，构造串行推理路径组，并结合基于退出位置的递减奖励策略，引导模型在保证正确性的前提下尽早终止推理。相比并行采样路径的GRPO，S-GRPO以更精细的方式建模推理充分性，提升推理效率与答案准确性 |
- </details>                         
+| This paper finds that large language models implicitly monitor their relative reasoning progress during explicit reasoning stages. Based on this insight, it proposes the **Thinking Progress Vector** method, which dynamically regulates reasoning length by intervening in this vector, thereby alleviating the issue of overthinking. | 本文发现大型语言模型在显式推理阶段能够内隐地监控自身的相对思维进度，据此提出“思维进度向量”方法，通过干预该向量实现对推理长度的动态调控，从而缓解过度推理问题。 |
+ </details>                                                  
+
+#### 
+
+<details>
+<summary>Fractional Reasoning via Latent Steering Vectors Improves Inference Time Compute <a href="https://arxiv.org/pdf/2506.15882" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| To enable fine-grained control over the reasoning behavior of large language models, **Fractional Reasoning** introduces a latent-space-guided method for reasoning-phase modulation. This approach constructs an implicit offset vector by contrasting positive and negative prompts, and injects it into the model’s hidden states with adjustable intensity during inference. Unlike fixed instruction-based prompting, this method requires no additional training, is model-agnostic, and supports adaptive reasoning control across tasks with varying complexity. It demonstrates superior performance and enhanced interpretability in both breadth-oriented and depth-oriented reasoning scenarios. | 为实现对大语言模型推理行为的精细调控，Fractional Reasoning 提出了一种基于隐空间引导向量的推理阶段控制方法。该方法通过对比正负提示生成隐式偏移向量，并在推理时以可调强度注入模型隐状态，从而实现对提示强度的连续控制。相比固定指令提示，该方法无需额外训练，模型无关，适用于不同任务复杂度下的自适应推理调节，在广度型与深度型推理策略中均展现出更优性能与更强可解释性。 |
+</details>                                                 
+
+#### 
+
+<details>
+<summary>Mitigating Overthinking in Large Reasoning Models via Manifold Steering <a href="https://arxiv.org/pdf/2505.22411" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Through mechanistic interpretability analysis, the authors find that the phenomenon of overthinking can be characterized by a specific low-dimensional manifold within the model’s activation space. They propose an intervention method based on this manifold, called **Manifold Steering**. By projecting interventions onto the low-dimensional manifold, this method effectively reduces interference from high-dimensional noise, mitigating the computational overhead and performance degradation caused by overthinking. | 作者通过机制可解释性分析发现，过度思考现象可以用模型激活空间中的特定低维流形表示，并提出了基于该流形的干预方法——流形引导（Manifold Steering）。该方法通过将干预投影到低维流形上，有效减少高维噪声的干扰，缓解了过度思考带来的计算开销和性能下降问题。 |
+ </details>       
+
+
+## 🌟 Efficient Reasoning by Controlling Reasoning Traces
 
 ### CoT Compression
 
@@ -484,6 +407,175 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Hassid et al.  suggest a strategy where $k$ reasoning paths are generated in parallel, and once the shortest $m$ of them ($k \geq m$) are completed, the generation of the remaining paths is terminated. The answers from the $m$ finished paths are then aggregated via majority voting to select the final reasoning outcome. | 为提高推理效率，该方法对给定问题并行生成 $k$ 条思维链（Chain-of-Thought），一旦其中最短的 $m$ 条轨迹（$m \leq k$）生成完毕，立即终止其余生成过程。随后，对这 $m$ 条轨迹所对应的答案进行多数投票，若存在票数相同的情况，则选择思维链长度最短的答案作为最终输出。由于推理路径的生成成本较高，该策略通过并行解码并在满足最小轨迹数后即刻停止，有效减少了计算开销，并显著缩短了推理时间。 |
 </details> 
+
+
+
+## 🌟 Efficient Reasoning by Controlling Reasoning Length
+
+
+### Early Exit
+
+<details>
+  <summary> To Think or Not to Think: Exploring the Unthinking Vulnerability in Large Reasoning Models <a href="https://arxiv.org/pdf/2502.12202" target="_blank">
+    [Paper]
+</a></summary>
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| The authors propose the **Monitoring of Thought (MoT)** framework, which dynamically evaluates the necessity of deep reasoning both before and during the inference process of a large reasoning model. Once it determines that the current input or reasoning is sufficient, MoT immediately terminates the reasoning process, thereby avoiding redundant computation and improving efficiency. | 作者提出了思维监控框架（Monitoring of Thought, MoT），该框架在推理大模型接收输入前及推理过程中动态评估是否需要进行深度思考。一旦判断当前输入或推理已足够，MoT即刻终止推理过程，避免冗余计算，提高效率。 |
+</details>                                                                                                             
+
+
+<details>
+<summary> Dynamic Early Exit in Reasoning Models <a href="https://arxiv.org/pdf/2504.15895" target="_blank">
+    [Paper]
+</a></summary>
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper proposes **DEER**, a **training-free dynamic early-exit reasoning** method. DEER first detects pivotal keywords (e.g., *“wait”*) in long chain-of-thought (CoT) sequences and replaces them with guiding tokens such as *“final answer”* to prompt the model to generate a **tentative answer** based on the current reasoning context. The **confidence** of the tentative answer is then evaluated: if sufficiently high, the answer is returned directly; otherwise, the model rolls back to the turning point and continues reasoning. To further improve efficiency, DEER introduces a **branch-parallel acceleration strategy** that executes tentative answer evaluation and continued reasoning in parallel, significantly improving inference speed and resource utilization. | 该论文提出一种**无需训练的动态推理提前退出方法 DEER**。该方法首先在长 CoT 中检测具有转折意义的关键词（如 “wait”），并将其替换为“final answer”等引导词，提示模型基于当前推理内容生成**试探性答案**。随后，评估该答案的**置信度**：若置信度足够高则直接输出，反之则回退至转折点继续推理。为提升推理效率，DEER进一步设计了**分支并行加速策略**，将试探性答案评估与后续推理并行执行，有效提升整体推理速度与资源利用率。 |
+ </details>                                                  
+
+
+
+
+<details>
+<summary>ConCISE: Confidence-guided Compression in Step-by-step Efficient Reasoning <a href="https://arxiv.org/pdf/2505.04881" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper proposes the **CONCISE** framework. The authors identify two typical redundancy patterns in reasoning: (1) **Confidence Deficit**, where the model underestimates its correct intermediate reasoning steps, triggering unnecessary self-reflection; and (2) **Termination Delay**, where the model continues reflecting even after generating the correct answer. To address these issues, CONCISE introduces two techniques: **Confidence Injection**, which inserts high-confidence phrases to boost the model's trust in its intermediate reasoning; and **Early Stopping**, which employs a confidence detector to monitor model certainty and halts generation once a predefined threshold is exceeded. | 这篇论文提出 CONCISE 框架。作者首先归纳了推理中存在两种典型冗余模式：一是置信度不足（Confidence Deficit），即模型低估自身正确推理步骤，从而触发不必要的反思；二是终止延迟（Termination Delay），即生成正确答案后仍持续反思，造成冗余。为此，CONCISE框架**置信度注入（Confidence Injection）方法，通过插入高置信度短语提升模型对中间推理的信任度。提前终止（Early Stopping）方法通过置信度探测器监控模型置信度，在超过设定阈值时终止生成。 |
+</details>                                                   
+
+
+
+<details>
+<summary> Think or Not? Exploring Thinking Efficiency in Large Reasoning Models via an Information-Theoretic Lens<a href="https://arxiv.org/pdf/2505.18237" target="_blank">
+    [Paper]
+</a></summary>
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper revisits the efficiency of reasoning paths in large language models from an information-theoretic perspective, revealing a fundamental trade-off between *reasoning length* and *semantic efficiency*. The authors introduce two novel metrics: **InfoBias**, which measures the deviation of a model’s reasoning path from the ideal path, and **InfoGain**, which quantifies the information increment brought by each reasoning step. Empirical studies show that longer reasoning paths exhibit higher InfoBias and diminishing InfoGain, especially when generating incorrect answers. To address this, the paper proposes an **information entropy–based adaptive reasoning mechanism**, which includes a dynamic stopping strategy (terminating reasoning early when InfoGain remains below a threshold for *k* consecutive steps) and entropy-regularized training (introducing an entropy loss during fine-tuning to encourage the model to terminate early under low-entropy conditions). | 本文从信息论视角重新审视了大型语言模型推理路径的效率问题，揭示了“推理长度”与“语义效率”之间存在基本权衡关系。作者引入了两个新指标：**InfoBias**（衡量模型推理路径偏离理想路径的程度）和 **InfoGain**（衡量每步推理所带来的信息增量），并通过实证研究发现：推理路径越长，信息偏差越高、信息增益越递减，特别是在生成错误答案时更为显著。为此，提出了一种**基于信息熵的自适应推理机制**，包括动态终止机制（当连续k步的InfoGain低于阈值时，提前终止推理）和熵正则化训练（在微调阶段引入熵损失函数，鼓励模型在低熵状态下提前终止）。 |
+</details>                                               
+
+
+<details>
+<summary> Scalable Chain of Thoughts via Elastic Reasoning<a href="https://arxiv.org/pdf/2505.05315" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper proposes the **Elastic Reasoning** method, which divides the token budget of the reasoning process into two parts: the thinking phase and the answering phase, enabling controllable and adaptive management of reasoning length. The method enforces early termination of the reasoning once the token budget for the thinking phase is reached, ensuring the completeness of the answering phase. | 这篇论文提出了弹性推理（Elastic Reasoning）方法，通过将推理过程的token预算分为思考阶段和解答阶段两部分，实现对推理长度的可控和自适应管理。该方法通过在思考阶段达到预算上限时强制结束推理，保证了解答部分的完整性。 |
+ </details>                                                
+
+
+<details>
+<summary> Answer Convergence as a Signal for Early Stopping in Reasoning<a href="https://arxiv.org/pdf/2506.02536" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper addresses the issues of verbosity and redundancy in chain-of-thought reasoning of large language models (LLMs) and proposes three early stopping strategies to improve inference efficiency: (1) an unsupervised stopping mechanism based on answer consistency, which detects convergence by monitoring the consistency of consecutive output answers; (2) a decoding strategy that adjusts the probability of generating an “end-of-reasoning” token to encourage early termination; and (3) a supervised learning method leveraging internal model activation sequences, where an LSTM models reasoning progress to dynamically predict the optimal stopping point. | 这篇论文针对大型语言模型（LLMs）链式思维推理中存在的冗长和冗余问题，提出了三种推理过程中的提前终止策略以提升推理效率：基于答案一致性的无监督停止机制，通过监测连续输出答案的一致性判断推理是否收敛；基于结束标记概率调整的解码策略，提升模型生成“推理结束”标记的概率以促使提前停止；以及基于模型内部激活序列的监督学习方法，利用LSTM对推理进度进行建模，动态预测最佳停止点。 |
+</details>                                                
+
+
+
+<details>
+<summary> Reasoning Models Know When They’re Right: Probing Hidden States for Self-Verification<a href="https://arxiv.org/pdf/2504.05419" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper segments the full reasoning process into several chunks, with the model generating an intermediate answer at the end of each chunk. Each intermediate answer is labeled with a binary supervision signal (*y* ∈ {0, 1}) indicating whether it corresponds to the final correct answer. The final hidden state of each chunk is extracted as the input feature *x*, forming a training dataset of (*x*, *y*) pairs. A multi-layer perceptron (MLP) probe is then trained to predict the probability that a given intermediate answer is correct. During inference, if the predicted probability of an intermediate answer being correct exceeds a certain threshold, reasoning is terminated early and the answer is output, thereby reducing unnecessary computational overhead. | 本文将完整的推理过程划分为若干个 chunk，并在每个 chunk 末尾由模型生成一个中间答案，标注其是否为最终正确答案（以 0/1 作为监督信号 y）。同时，提取每个 chunk 对应的最后一个 hidden state 作为输入特征 x，构建训练数据集 (x, y)。在此基础上训练一个 MLP 探针，用于预测当前答案为正确答案的概率。在推理阶段，当模型生成的某一中间答案被判定为正确概率较高时，即可提前终止推理并输出该答案，从而有效减少不必要的计算开销。 |
+ </details>                                                 
+
+#### 
+
+<details>
+<summary>FlashThink: An Early Exit Method For Efficient Reasoning <a href="https://arxiv.org/pdf/2505.13949" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| FlashThink designs an early stopping mechanism based on a verification model. This method divides the reasoning content into multiple segments and uses a trained verification model to determine whether the current segment is sufficient to produce the correct answer, thereby deciding whether to terminate reasoning early. | FlashThink 设计了一种基于验证模型的早停机制。该方法将推理内容划分为多个片段，利用训练好的验证模型判断当前推理片段是否已足够得到正确答案，从而决定是否提前终止推理。 |
+</details>                                             
+
+
+
+<details>
+<summary> Wait, We Don’t Need to “Wait” ! Removing Thinking Tokens Improves Reasoning Efficiency<a href="https://arxiv.org/pdf/2506.08343" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This paper proposes the **NOWAIT** method, which employs a logit processor during inference to **effectively prohibit the generation of specific key tokens**. For any designated key tokens, its corresponding logit value is set to a large negative number during generation, making tokens related to self-reflection nearly impossible to be sampled by the model, thereby enabling more efficient reasoning. The suppressed key tokens include:<br/> “wait,” “alternatively,” “hmm,” “but,” “however,” “alternative,” “another,” “check,” “double-check,” “oh,” “maybe,” “verify,” “other,” “again,” “now,” “ah,” and “any.” | 本文提出NOWAIT方法 ,在推理过程中采用 logit 处理器，**有效禁止模型生成特定关键词**。对于任意指定关键词，生成时直接将其对应的 logit 值设置为极大负数，从而使与反思相关的 token 几乎不可能被模型采样，进而实现高效推理。关键词包括：<br/> “wait”, “alternatively”, “hmm”, “but”, “however”, “alternative”, “another”, “check”, “double-check”, “oh”, “maybe”, “verify”, “other”, “again”, “now”, “ah”, “any” |
+ </details>                                             
+
+#### 
+
+<details>
+<summary> Thoughts Are All Over the Place: On the Underthinking of o1-Like LLMs<a href="https://arxiv.org/pdf/2501.18585" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Wang et al. propose the **Thought Switching Penalty (TIP)**, which adjusts the logits of **tokens associated with thought transitions**. | Wang等人提出思路切换惩罚方法（TIP, Thought Switching Penalty），对**与思路切换相关的 token**的 logits进行调整。 |
+ </details>                                               
+
+#### 
+
+<details>
+<summary> Efficient Reasoning Through Suppression of Self-Affirmation Reflections in Large Reasoning Models <a href="https://www.arxiv.org/pdf/2506.12353" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note | Chinese Note |
+| ------------ | ------------ |
+|   Similar to the previous two papers, both focus on suppressing the generation of related keywords.
+           | 与上两篇论文类似，均为抑制相关关键词的生成。             |
+</details>  
+
+#### 
+
+<details>
+<summary>S-GRPO: Early Exit via Reinforcement Learning in Reasoning Models <a href="https://arxiv.org/pdf/2505.07686" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| This method inserts  *early exit* instructions at different positions within a single reasoning chain to construct multiple serial reasoning path groups. It then applies a decaying reward strategy based on the exit position: the earlier the model terminates reasoning while still producing a correct answer, the higher the reward it receives. This guides the model to stop reasoning as early as possible without sacrificing accuracy. | S-GRPO（Serial-Group Decaying-Reward Policy Optimization）方法通过在单条思维链不同位置插入“提前退出”指令，构造串行推理路径组，并结合基于退出位置的递减奖励策略，引导模型在保证正确性的前提下尽早终止推理。相比并行采样路径的GRPO，S-GRPO以更精细的方式建模推理充分性，提升推理效率与答案准确性 |
+ </details>                         
+
+
 
 
 ### Adaptive Reasoning
@@ -836,92 +928,12 @@ Efficient reasoning with single model aims to achieve efficient reasoning by opt
 | This paper dynamically adjusts the ratio of short-chain and long-chain reasoning data during model fine-tuning, achieving a significant improvement in reasoning efficiency while maintaining high reasoning accuracy. | 本文在模型微调的过程中，动态调整短链和长链推理数据的比例，实现模型在保持高推理准确性的同时大幅提升推理效率。 |
 </details>
 
-### Representation Engineering based Efficient Reasoning
 
-<details>
-<summary>Steerable Reasoning Calibration of Large Language Models for Free <a href="https://arxiv.org/pdf/2504.07986" target="_blank">
-    [Paper]
-</a></summary>
+                                          
 
 
+## 🌟 Efficient Reasoning by Controlling Reasoning System
 
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **SEAL (Steerable rEAsoning caLibration)** is a training-free method for improving reasoning efficiency. It classifies reasoning units in the large language model's reasoning process into execution, reflection, and transition types, and constructs a **reasoning guidance vector** to represent the direction of efficient reasoning. During decoding, SEAL refines the hidden space representations in real time to dynamically suppress redundant reflections and abrupt transitions, while preserving essential execution logic. | SEAL（Steerable rEAsoning caLibration）是一种无需额外训练的推理效率提升方法，通过对大语言模型推理过程中的思维单元进行分类（执行、反思、过渡），构造“推理引导向量”以表示高效推理方向，并在推理解码时对隐空间表示进行微调，从而动态抑制冗余的反思与跳跃性推理，保留关键执行逻辑。 |
-</details>                                       
-
-#### 
-
-<details>
-<summary> On Reasoning Strength Planning in Large Reasoning Models<a href="https://arxiv.org/pdf/2506.08390" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| We investigate this phenomenon from the perspective of model activations. Our analysis reveals that LRMs pre-plan the *reasoning intensity* in their activations before generating any reasoning content, and this intensity is causally governed by the magnitude of a pre-allocated *directional vector*. Specifically, using linear probes, we show that the number of reasoning tokens can be predicted solely from the activation patterns of the input question, suggesting that the model is capable of estimating the required reasoning effort in advance. Further analysis indicates that LRMs encode this reasoning intensity via a directional vector embedded in the activation space, where the vector’s magnitude modulates the intensity. Subtracting this vector reduces both the number of reasoning tokens and final performance, while adding it leads to longer reasoning traces and improved accuracy. Moreover, this directional vector consistently predicts the reasoning length and influences the duration of the reasoning phase by modifying the logits of the termination token (</think>). | 本文从模型激活的视角对此现象进行了探讨。我们发现，LRMs在生成推理内容之前，已在激活中预先规划了推理强度，而该推理强度由一个预先分配的方向向量的大小因果控制。具体而言，我们利用线性探针表明，仅凭问题的激活信息即可预测推理token的数量，表明模型能够提前估计所需的推理强度。进一步分析发现，LRMs通过嵌入在激活中的预分配方向向量编码这一推理强度，该向量的大小调节推理强度。对该向量的减法操作会导致推理token数和性能下降，而加法操作则会增加推理token数并提升性能。此外，该方向向量持续对推理长度产生正向预测效果，并通过修改终止推理token（</think>）的logits来影响推理过程的长度。 |
- </details>                                             
-
-#### 
-
-<details>
-<summary> CoT-Valve: Length-Compressible Chain-of-Thought Tuning<a href="https://arxiv.org/pdf/2502.09601" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **Length-Compressible Chain-of-Thought (CoT) Tuning**, a fine-tuning strategy that learns a directional vector in parameter space to effectively control the length of reasoning chains. | 本文提出一种**长度可压缩的Chain-of-Thought微调策略**（Length-Compressible CoT Tuning），通过在参数空间中学习一条方向向量，实现对推理链长度的有效控制。 |
- </details>                                                 
-
-#### 
-
-<details>
-<summary>Overclocking LLM Reasoning: Monitoring and Controlling Thinking Path Lengths in LLMs <a href="https://arxiv.org/pdf/2506.07240" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper finds that large language models implicitly monitor their relative reasoning progress during explicit reasoning stages. Based on this insight, it proposes the **Thinking Progress Vector** method, which dynamically regulates reasoning length by intervening in this vector, thereby alleviating the issue of overthinking. | 本文发现大型语言模型在显式推理阶段能够内隐地监控自身的相对思维进度，据此提出“思维进度向量”方法，通过干预该向量实现对推理长度的动态调控，从而缓解过度推理问题。 |
- </details>                                                  
-
-#### 
-
-<details>
-<summary>Fractional Reasoning via Latent Steering Vectors Improves Inference Time Compute <a href="https://arxiv.org/pdf/2506.15882" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| To enable fine-grained control over the reasoning behavior of large language models, **Fractional Reasoning** introduces a latent-space-guided method for reasoning-phase modulation. This approach constructs an implicit offset vector by contrasting positive and negative prompts, and injects it into the model’s hidden states with adjustable intensity during inference. Unlike fixed instruction-based prompting, this method requires no additional training, is model-agnostic, and supports adaptive reasoning control across tasks with varying complexity. It demonstrates superior performance and enhanced interpretability in both breadth-oriented and depth-oriented reasoning scenarios. | 为实现对大语言模型推理行为的精细调控，Fractional Reasoning 提出了一种基于隐空间引导向量的推理阶段控制方法。该方法通过对比正负提示生成隐式偏移向量，并在推理时以可调强度注入模型隐状态，从而实现对提示强度的连续控制。相比固定指令提示，该方法无需额外训练，模型无关，适用于不同任务复杂度下的自适应推理调节，在广度型与深度型推理策略中均展现出更优性能与更强可解释性。 |
-</details>                                                 
-
-#### 
-
-<details>
-<summary>Mitigating Overthinking in Large Reasoning Models via Manifold Steering <a href="https://arxiv.org/pdf/2505.22411" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Through mechanistic interpretability analysis, the authors find that the phenomenon of overthinking can be characterized by a specific low-dimensional manifold within the model’s activation space. They propose an intervention method based on this manifold, called **Manifold Steering**. By projecting interventions onto the low-dimensional manifold, this method effectively reduces interference from high-dimensional noise, mitigating the computational overhead and performance degradation caused by overthinking. | 作者通过机制可解释性分析发现，过度思考现象可以用模型激活空间中的特定低维流形表示，并提出了基于该流形的干预方法——流形引导（Manifold Steering）。该方法通过将干预投影到低维流形上，有效减少高维噪声的干扰，缓解了过度思考带来的计算开销和性能下降问题。 |
- </details>                                                 
-
-## 🌟 Efficient Reasoning with Model Collaboration
-Efficient reasoning with model collaboration aims to enhance reasoning efficiency and accuracy in LLMs by enabling cooperation between multiple LLMs, each leveraging distinct reasoning strengths. Unlike single model efficient reasoning method, collaborative frameworks strategically combine long-chain reasoning models (long CoT) that excel at handling complex tasks and short-chain reasoning models (short CoT) that are lightweight and efficient for general tasks. This synergy allows for more fine-grained and cost-effective control of the reasoning process. Specific methods include Long–Short Model Collaboration Reasoning, Model Consolidation, and Speculative Decoding.
 
 ### Long–Short Model Collaboration Reasoning
 
@@ -1160,75 +1172,6 @@ Efficient reasoning with model collaboration aims to enhance reasoning efficienc
 | This paper proposes **Ada-R1**, a two-stage adaptive reasoning framework. In the first stage, model merging is used to combine a reasoning model with a standard large language model, enabling the generation of both long and short reasoning paths. In the second stage, a biLevel adaptive reasoning mechanism is introduced: at the **group level**, a preference-guided model selects between long and short reasoning based on the input; at the **instance level**, preference optimization encourages the model to produce more concise reasoning while maintaining accuracy, thereby improving overall inference efficiency. | 本文提出Ada-R1，一个两阶段的自适应推理框架。第一阶段通过模型合并，结合长推理模型与常规大模型，使其具备生成长短推理路径的能力；第二阶段引入双层自适应推理优化机制，包括群体级偏好引导模型依据输入选择长推理还是短推理，实例级偏好促使模型在保持准确性的前提下生成更简洁的推理，从而提升推理效率。 |
 </details>
 
-### Speculative Decoding
-
-<details>
-<summary> Reward-Guided Speculative Decoding for Efficient LLM Reasoning<a href="https://arxiv.org/pdf/2501.19324" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes the **Reward-Guided Speculative Decoding (RSD)** framework, which addresses the inefficiency of traditional speculative decoding under strict unbiasedness constraints. RSD employs a lightweight small model to generate candidate reasoning steps, evaluates them using a reward function, and invokes a large model for correction only when necessary, thereby enabling a dynamic trade-off between accuracy and computational cost. | 本文提出了Reward-Guided Speculative Decoding (RSD)框架，突破传统推测解码在无偏性约束下效率低下的问题。RSD利用轻量小模型生成候选推理步骤，并结合奖励函数对其进行评估，仅在必要时调用大模型进行修正，从而实现精度与计算成本之间的动态权衡。 |
-</details>
-
-#### 
-
-<details>
-<summary> SpecRouter: Adaptive Routing for Multi-Level Speculative Decoding in Large Language Models<a href="https://arxiv.org/pdf/2505.07680" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| **SpecRouter** introduces a multi-stage, reasoning-aware decoding framework to replace the conventional static draft–target model setup. This method dynamically selects the optimal draft model and intermediate verification path based on task complexity and system load, thereby improving reasoning efficiency and reducing refusal rates. | SpecRouter提出多级推理式解码框架以替代传统静态的草稿-目标模型搭配。该方法可根据任务复杂度与系统负载动态选择最优草稿模型及中间验证路径，优化推理效率并降低拒绝率。 |
-</details>
-
-#### 
-
-<details>
-<summary> SpecReason: Fast and Accurate Inference-Time Compute via Speculative Reasoning<a href="https://arxiv.org/pdf/2504.07891" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes **SpecReason**, a speculative reasoning framework that adaptively delegates semantically simple and non-critical reasoning steps to a lightweight model at a fine-grained level. A stronger model then semantically verifies these steps; if verification passes, the reasoning proceeds, otherwise the stronger model takes over the reasoning process. | 本文提出了一种名为 SpecReason 的推测式推理框架，SpecReason 通过细粒度、自适应地将语义简单且非关键的推理步骤交由轻量级模型完成，再由强模型对这些步骤进行语义层面的验证，若评估通过则继续推理，否则由强模型接替进行推理。 |
-</details>
-
-#### 
-
-<details>
-<summary>Speculative thinking: Enhancing small-model reasoning with large model guidance at inference time <a href="https://arxiv.org/pdf/2504.12329" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Speculative Thinking  dynamically identifies reflective, uncertain, or self-negating tokens in the draft generated by the SLM. The LLM selectively intervenes at these critical reasoning junctures, enhancing the quality of reasoning for complex tasks while preserving overall efficiency. | Speculative Thinking通过在推理过程中动态识别小模型生成中的反思、验证或反复否定等信号，选择性地由大模型介入关键步骤，以增强复杂任务中的推理质量。 |
-</details>
-
-#### 
-
-<details>
-<summary> Efficient Reasoning for LLMs through Speculative Chain-of-Thought<a href="https://arxiv.org/pdf/2504.19095" target="_blank">
-    [Paper]
-</a></summary>
-
-
-
-| English Note                                                 | Chinese Note                                                 |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| This paper proposes a Speculative Chain-of-Thought (SCoT) framework based on collaboration between large and small models. The method employs a lightweight draft model to generate preliminary reasoning chains, which are then selected and corrected by the target model, effectively improving reasoning efficiency and speed. | 本文提出了一种基于大模型与小模型协同的Speculative Chain-of-Thought（SCoT）框架。该方法通过轻量级草稿模型进行思维链草拟，并利用目标模型对草稿进行选择和纠错，有效提升了推理效率与速度。 |
-</details>
 
 # 🔍 Citation
 
