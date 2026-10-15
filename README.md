@@ -980,6 +980,20 @@ Recently, Large Reasoning Models (LRMs) have become a research hotspot due to th
 #### 
 
 <details>
+<summary>DoubtLess: Training-Free Contrastive Decoding for Efficient Reasoning <a href="https://arxiv.org/pdf/2610.18862" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+| English Note                                                 | Chinese Note                                                 |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| DoubtLess uses the same small model under brief and verbose instructions to read the current chain of thought. It scales the brief-minus-verbose logit difference by a guidance strength and adds it to a larger reasoning model's thinking logits, with all model weights fixed. Across seven benchmarks, it reduces Qwen3-32B's thinking tokens by 31% while preserving overall accuracy. | DoubtLess 使用同一个小模型，在简短和冗长两种指令下读取当前思维链，将简短指令相对于冗长指令的 logit 差乘以引导强度，再加到较大推理模型的思考阶段 logits 上，所有模型权重均保持固定。在七个基准上，该方法将 Qwen3-32B 的思考 token 数减少 31%，整体准确率保持不变。 |
+</details>
+
+####
+
+<details>
 <summary> Plan and Budget: Effective and Efficient Test-Time Scaling on Large Language Model Reasoning<a href="https://arxiv.org/abs/2505.16122" target="_blank">
     [Paper]
 </a></summary>
