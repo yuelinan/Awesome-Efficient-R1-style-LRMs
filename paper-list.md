@@ -489,6 +489,13 @@
 
 
 
+<summary>DoubtLess: Training-Free Contrastive Decoding for Efficient Reasoning <a href="https://arxiv.org/pdf/2610.18862" target="_blank">
+    [Paper]
+</a></summary>
+
+
+
+
 <summary> Plan and Budget: Effective and Efficient Test-Time Scaling on Large Language Model Reasoning<a href="https://arxiv.org/abs/2505.16122" target="_blank">
     [Paper]
 </a></summary>
